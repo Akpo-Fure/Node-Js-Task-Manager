@@ -1,18 +1,15 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { getAllTasks, addTask, getTask, deleteTask, updateTask } from '../controllers/taskControllers';
+import { protect } from '../middleware/authMiddlware';
 const router = express.Router();
 
 
-/* GET home page. */
-router.get('/', function (req: Request, res: Response, next: NextFunction) {
-  res.render('index', { title: 'Express' });
-});
 
-router.get('/', getAllTasks)
-router.get('/:id', getTask)
-router.post('/', addTask)
-router.patch('/:id', updateTask)
-router.delete('/:id', deleteTask)
+router.get('/', protect, getAllTasks)
+router.get('/:id', protect, getTask)
+router.post('/', protect, addTask)
+router.patch('/:id', protect, updateTask)
+router.delete('/:id', protect, deleteTask)
 
 
 export default router;

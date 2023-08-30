@@ -7,7 +7,7 @@ import connectDB from './config/db';
 import dotenv from 'dotenv';
 
 import taskRouter from './routes/taskRoutes';
-import usersRouter from './routes/users';
+import usersRouter from './routes/userRoutes';
 
 dotenv.config()
 connectDB();

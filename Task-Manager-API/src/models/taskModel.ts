@@ -7,7 +7,7 @@ enum TaskStatus {
     Completed = 'Completed',
 }
 
-export interface ITask extends Document {
+interface ITask extends Document {
     Name: string;
     Description: string;
     Status: TaskStatus;
