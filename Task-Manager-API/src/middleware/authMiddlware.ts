@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import User from "../models/userModel";
 
 export const protect = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -14,13 +13,6 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
             try {
                 const decoded = jwt.verify(token, process.env.JWT_SECRET!) as { userId: string };
                 req.user = decoded.userId;
-                const currentUser = await User.findById(req.user);
-
-                if (!currentUser) {
-                    return res.status(401).json({ message: "Author not found" });
-                }
-                // Store the authenticated author in res.locals
-                res.locals.author = currentUser;
                 next();
             } catch (error: any) {
                 return res.status(401).json({
@@ -29,7 +21,7 @@ export const protect = async (req: Request, res: Response, next: NextFunction) =
                 });
             }
         } else {
-            return res.status(401).json({ message: "Not authorized, no token" });
+            return res.status(401).json({ message: "Not authorized, login to continue" });
         }
     } catch (error: any) {
         res.status(500).json({ Error: error.message });

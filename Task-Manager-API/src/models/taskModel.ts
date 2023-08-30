@@ -11,6 +11,7 @@ interface ITask extends Document {
     Name: string;
     Description: string;
     Status: TaskStatus;
+    User: string;
 }
 
 const TaskValidationSchema = joi.object({
@@ -22,7 +23,8 @@ const TaskValidationSchema = joi.object({
 const TaskSchema: Schema = new Schema({
     Name: { type: String, required: true },
     Description: { type: String, required: true },
-    Status: { type: String, enum: Object.values(TaskStatus), required: true }
+    Status: { type: String, enum: Object.values(TaskStatus), required: true },
+    User: { type: Schema.Types.ObjectId, ref: "User", required: true },
 }, { timestamps: true }
 );
 
