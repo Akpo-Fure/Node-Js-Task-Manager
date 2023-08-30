@@ -3,10 +3,14 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import connectDB from './config/db';
+import dotenv from 'dotenv';
 
-import indexRouter from './routes/index';
+import taskRouter from './routes/taskRoutes';
 import usersRouter from './routes/users';
 
+dotenv.config()
+connectDB();
 const app: Application = express();
 
 
@@ -20,8 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "..", 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/akpofure-task-manager/tasks', taskRouter);
+app.use('/akpofure-task-manager/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req: Request, res: Response, next: NextFunction) {
