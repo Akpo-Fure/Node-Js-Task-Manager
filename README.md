@@ -19,9 +19,12 @@ Follow these steps to set up and run the project on your local machine.
 git clone https://github.com/Akpo-Fure/Node-Js-Task-Manager.git
 ```
 
-2. cd Task-Manager-API
+2. Change directory to Task-Manager-API
+```
+cd Task-Manager-API
+```
 
-3. Install the dependecies using yarn
+4. Install the dependecies using yarn
 ```
 RUN yarn
 ```
